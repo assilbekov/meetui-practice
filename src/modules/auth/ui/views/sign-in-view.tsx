@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { FaGoogle, FaGithub } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -49,8 +49,8 @@ export function SignInView() {
       },
       {
         onSuccess: () => {
-          router.push("/");
           setIsLoading(false);
+          router.push("/");
         },
         onError: ({ error }) => {
           setError(error.message);
@@ -134,7 +134,14 @@ export function SignInView() {
                   variant="outline"
                   className="w-full"
                   disabled={isLoading}
+                  onClick={() => {
+                    authClient.signIn.social({
+                      provider: "google",
+                      callbackURL: "/",
+                    });
+                  }}
                 >
+                  <FaGoogle />
                   Google
                 </Button>
                 <Button
@@ -142,7 +149,13 @@ export function SignInView() {
                   variant="outline"
                   className="w-full"
                   disabled={isLoading}
+                  onClick={() => {
+                    authClient.signIn.social({
+                      provider: "github",
+                    });
+                  }}
                 >
+                  <FaGithub />
                   Github
                 </Button>
               </div>
