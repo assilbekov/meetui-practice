@@ -24,7 +24,7 @@ import { authClient } from "@/lib/auth-client";
 import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.email("Invalid email address"),
+  email: z.string(),
   password: z.string().min(1, "Password is required"),
 });
 
